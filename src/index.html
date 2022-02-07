@@ -5,19 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main.css" />
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <title>Document</title>
   </head>
   <body>
-    <form action="#">
-      <label for="age">
-        age
-        <input type="number" id="age" />
-      </label>
-      <label for="weight">
-        weight
-        <input type="text" id="weight" />
-      </label>
-    </form>
+    <section class="s1">
+      <form action="#" class="form">
+        <label for="name">
+          <p>name</p>
+          <input type="text" id="name" required />
+        </label>
+        <label for="age">
+          <p>age</p>
+          <input type="number" id="age" required />
+        </label>
+        <label for="weight">
+          <p>weight</p>
+          <input type="number" id="weight" required />
+        </label>
+        <br />
+        <p></p>
+        <input type="submit" value="Submit" id="submit" />
+      </form>
+      <span id="msg"></span>
+    </section>
   </body>
 </html>
