@@ -142,11 +142,8 @@ function renderError(content) {
     document.getElementById("error").innerHTML = content
 }
 // appending in html form 
-function append(type, content, parent, iserror) {
+function append(type, content, parent) {
     var node = document.createElement(type)
     node.innerText = content
     document.getElementById(parent).prepend(node)
-    if (iserror) {
-        node.style.color = 'red'
-    }
 }
