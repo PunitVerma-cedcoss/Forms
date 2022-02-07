@@ -12,6 +12,10 @@ input[type="submit"] {
 #msg {
   margin: 10px;
 }
+#error{
+  color: red;
+  margin: 10px;
+}
 #msg p {
   margin: 0;
   padding: 0;

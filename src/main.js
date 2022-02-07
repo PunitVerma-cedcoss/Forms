@@ -66,45 +66,64 @@ document.getElementById("submit").addEventListener("click", function (e) {
     var name = document.getElementById("name").value
     var age = parseInt(document.getElementById("age").value)
     var weight = parseInt(document.getElementById("weight").value)
-    if (validate(age, weight)) {
+    if (validate(name, age, weight)) {
         console.log("values are valid")
         append("p", obct(name, age, weight), "msg")
+        // clearing the error log
+        renderError("")
     }
     else {
         console.log("error occured")
     }
 })
 
-function validate(age, weight) {
-    if (isNaN(age)) {
+function validate(name, age, weight) {
+    informError("weight",false)
+    informError("age",false)
+    informError("name",false)
+    if (isNaN(age) && isNaN(weight) && name == '') {
+        informError("weight")
         informError("age")
+        informError("name")
+        renderError("all fields are required")
+        return false
+    }
+    else if (name == '') {
+        informError("name")
+        renderError("name is required")
+        return false
+    }
+    else if (isNaN(age)) {
+        informError("age")
+        renderError("age is invalid/required")
         return false
     }
     else if (isNaN(weight)) {
         informError("weight")
+        renderError("weight is invalid/required")
         return false
     }
-    else if (age < 5 && weight <= 14) {
+    else if (age < 5 && weight <= 0) {
         informError("weight")
         informError("age")
+        renderError("age is invalid and weight should be greater than 0",)
         return false
     }
     else if (age < 5) {
         informError("age")
+        renderError("age should be greater than 5")
         return false
     }
-    else if (weight <= 14) {
+    else if (weight <= 0) {
         informError("weight")
+        renderError("weight cannot be less than 1",)
         return false
     }
 
-    else if (age > 20 && weight >= 40) {
+    else if (age > 20) {
         informError("weight")
         informError("age")
-        return false
-    }
-    else if (age > 20) {
-        informError("age")
+        renderError("age greater than 20 is not supported")
         return false
     }
     else {
@@ -114,14 +133,20 @@ function validate(age, weight) {
     }
 }
 
-// render errors in html 
+// render border errors in html 
 function informError(id, error = true) {
     document.getElementById(id).style.borderColor = error ? "red" : ""
 }
-
+// static error
+function renderError(content) {
+    document.getElementById("error").innerHTML = content
+}
 // appending in html form 
-function append(type, content, parent) {
+function append(type, content, parent, iserror) {
     var node = document.createElement(type)
     node.innerText = content
-    document.getElementById(parent).appendChild(node)
+    document.getElementById(parent).prepend(node)
+    if (iserror) {
+        node.style.color = 'red'
+    }
 }
